@@ -1,0 +1,158 @@
+.login-container {
+  max-width: 300px;
+  margin: 50px auto;
+  padding: 40px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  background-color: white;
+  min-height: 400px; /* Altura maior */
+  display: flex;
+  flex-direction: column; /* Organização em coluna */
+  justify-content: flex-end; /* Posiciona os elementos no final */
+  align-items: center;
+  box-shadow: 0 0 8px rgba(18, 41, 66, 0.5);
+
+
+}
+.login-container {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.login-logo {
+  display: block; /* Faz a logo ser exibida como um elemento de bloco */
+  margin: 0 auto; /* Centraliza horizontalmente */
+  max-width: 200px; /* Define um tamanho máximo para a logo */
+  height: auto; /* Mantém a proporção da imagem */
+  margin-bottom: 40px; /* Espaço entre a logo e os campos de login */
+}
+
+
+body {
+  background: linear-gradient(to bottom right, #007bffa2, #00bfff9a);
+  height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  width: 90%; /* Mesmo alinhamento dos inputs */
+  max-width: 280px;
+
+}
+
+input {
+  width: 90%; /* Margem interna para evitar preenchimento total */
+  max-width: 280px; /* Limite máximo da largura */
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+input:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  transition: box-shadow 0.2s ease-in-out;
+}
+input::placeholder {
+  color: #aaa;
+  transition: color 0.3s;
+}
+
+input:focus::placeholder {
+  color: #007BFF;
+}
+
+
+button {
+  width: 90%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #007BFF, #00BFFF);
+  transition: background 0.3s ease;
+
+
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Alinha os elementos à esquerda */
+  margin-bottom: 15px; /* Espaçamento entre a checkbox e o botão */
+  
+}
+
+.checkbox-container input {
+  margin-right: 8px; /* Espaço entre o checkbox e o texto */
+  
+  
+  
+}
+.checkbox-container input[type="checkbox"] {
+  width: auto; /* Remove larguras extras */
+  height: auto; /* Ajusta ao tamanho padrão */
+  margin-right: 10px; /* Espaço entre checkbox e texto */
+  
+}
+
+
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  text-align: center;
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+
+
+button:hover {
+  background: linear-gradient(to right, #0056b3, #0088cc);
+
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    max-width: 90%;
+    margin: 20px auto;
+  }
+}
+
+input:invalid {
+  border-color: #e74c3c;
+}
+.error-message {
+  color: #e74c3c;
+  margin-top: 10px;
+}
+

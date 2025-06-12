@@ -1,0 +1,180 @@
+
+<!-- Conteúdo da Página (pode incluir outros itens de configurações) -->
+<div class="settings-content">
+  <!-- Exemplo: pode ter conteúdo padrão da página aqui -->
+  <h1>Configurações</h1>
+  <p>Selecione uma opção do menu para gerenciar as configurações.</p>
+</div>
+
+<!-- Menu de Configurações -->
+<div class="settings-menu">
+  <button (click)="openSetting('cadastroDeItens')" title="Cadastro de Itens">
+    <i class="fa fa-plus-square"></i>
+  </button>
+  <button (click)="openSetting('outraConfig')" title="Outra Configuração">
+    <i class="fa fa-cogs"></i>
+  </button>
+  <button (click)="openSetting('personalizacaoCatalogo')" title="Personalizar Catálogo">
+    <i class="fa fa-paint-brush"></i> 
+  </button>
+</div>
+
+<!-- Modal para exibir a configuração selecionada -->
+<div class="modal-overlay" *ngIf="selectedSetting">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeSetting()">
+      <i class="fa fa-times"></i>
+    </button>
+
+    <ng-container [ngSwitch]="selectedSetting">
+      
+      <!-- Exemplo para Cadastro de Itens -->
+      <ng-container *ngSwitchCase="'cadastroDeItens'">
+        <div class="form-container">
+          <h2>Cadastro de Itens</h2>
+          
+          <form (ngSubmit)="addOrUpdateProduct()">
+            <div class="form-group">
+              <label for="codigo">Código do Produto</label>
+              <input type="text" [(ngModel)]="newProduct.codigo" name="codigo" id="codigo" placeholder="Digite o código" required (input)="onCodeInput()" />
+            </div>
+        
+            <div class="form-group">
+              <label for="segmento">Segmento</label>
+              <input type="text" [(ngModel)]="newProduct.segmento" name="segmento" id="segmento" placeholder="Digite o segmento" required />
+            </div>
+        
+            <div class="form-group">
+              <label for="descricaoVendas">Descrição para Vendas</label>
+              <input type="text" [(ngModel)]="newProduct.descricaoVendas" name="descricaoVendas" id="descricaoVendas" placeholder="Digite a descrição para vendas" required />
+            </div>
+        
+            <div class="form-group">
+              <label for="descricaoClientes">Descrição para Clientes</label>
+              <input type="text" [(ngModel)]="newProduct.descricaoClientes" name="descricaoClientes" id="descricaoClientes" placeholder="Digite a descrição para clientes" required />
+            </div>
+        
+            <div class="form-group">
+              <label for="imagem">Imagem do Produto</label>
+              <input type="url" [(ngModel)]="newProduct.imagem" name="imagem" id="imagem" placeholder="Insira a URL da imagem" required />
+            </div>
+        
+            <div class="form-group">
+              <label for="aplicacao">Aplicação</label>
+              <input type="text" [(ngModel)]="newProduct.aplicacao" name="aplicacao" id="aplicacao" placeholder="Digite a aplicação do produto" required />
+            </div>
+        
+            <div class="form-group">
+              <label for="precoPublico">Preço Público</label>
+              <input type="number" [(ngModel)]="newProduct.precoPublico" name="precoPublico" id="precoPublico" step="0.01" placeholder="Digite o preço público" required />
+            </div>
+        
+            <button type="submit" class="submit-btn">{{ isEditing ? 'Atualizar Produto' : 'Adicionar Produto' }}</button>
+          </form>
+        </div>
+      </ng-container>
+
+      <!-- Outra Configuração -->
+      <ng-container *ngSwitchCase="'outraConfig'">
+        <h2>Outra Configuração</h2>
+        <p>Aqui você pode inserir outras configurações do site.</p>
+      </ng-container>
+
+<!-- 🔹 Personalização do Catálogo -->
+<ng-container *ngSwitchCase="'personalizacaoCatalogo'">
+  <div class="form-container">
+    <h2>Personalizar Aparência do Catálogo</h2>
+
+    <div class="grid-layout">
+      <!-- Cor do Texto -->
+      <div class="color-group">
+        <label>Cor do Texto</label>
+        <div class="color-preview" [style.background]="configCatalog.textColor" (click)="openColorPicker('textColor')"></div>
+        <input type="color" [(ngModel)]="configCatalog.textColor" id="textColorPicker" style="display: none;" (input)="updateColor('textColor', $event)">
+      </div>
+
+      <!-- Cor do Código -->
+      <div class="color-group">
+        <label>Cor do Código</label>
+        <div class="color-preview" [style.background]="configCatalog.codeColor" (click)="openColorPicker('codeColor')"></div>
+        <input type="color" [(ngModel)]="configCatalog.codeColor" id="codeColorPicker" style="display: none;" (input)="updateColor('codeColor', $event)">
+      </div>
+
+          <!-- Cor da Descrição -->
+    <div class="color-group">
+      <label>Cor da Descrição</label>
+      <div class="color-preview" [style.background]="configCatalog.descriptionColor" (click)="openColorPicker('descriptionColor')"></div>
+      <input type="color" [(ngModel)]="configCatalog.descriptionColor" id="descriptionColorPicker" style="display: none;" (input)="updateColor('descriptionColor', $event)">
+    </div>
+
+        <!-- Cor do Preço de Venda -->
+        <div class="color-group">
+          <label>Cor do Preço de Venda</label>
+          <div class="color-preview" [style.background]="configCatalog.salePriceColor" (click)="openColorPicker('salePriceColor')"></div>
+          <input type="color" [(ngModel)]="configCatalog.salePriceColor" id="salePriceColorPicker" style="display: none;" (input)="updateColor('salePriceColor', $event)">
+        </div>
+
+        <!-- 🔹 Cor do Desconto e Cor da Sombra do Card - Agora LADO A LADO -->
+        <div class="color-group">
+          <label>Cor do Desconto</label>
+          <div class="color-preview" [style.background]="configCatalog.discountColor" (click)="openColorPicker('discountColor')"></div>
+          <input type="color" [(ngModel)]="configCatalog.discountColor" id="discountColorPicker" style="display: none;" (input)="updateColor('discountColor', $event)">
+        </div>       
+
+      <!-- Cor da Borda do Card -->
+      <div class="color-group">
+        <label>Cor da Borda do Card</label>
+        <div class="color-preview" [style.border]="'2px solid ' + configCatalog.cardBorderColor" (click)="openColorPicker('cardBorderColor')"></div>
+        <input type="color" [(ngModel)]="configCatalog.cardBorderColor" id="cardBorderColorPicker" style="display: none;" (input)="updateColor('cardBorderColor', $event)">
+      </div>
+    </div>
+ 
+
+    <!-- Gradiente de Fundo -->
+    <div class="form-group gradient-section">
+      <label>Gradiente de Fundo</label>
+      <div class="gradient-container">
+        <div class="color-group">
+          <label>Inicial</label>
+          <div class="color-preview" [style.background]="configCatalog.bgGradientStart" (click)="openColorPicker('bgGradientStart')"></div>
+          <input type="color" [(ngModel)]="configCatalog.bgGradientStart" id="bgGradientStartPicker" style="display: none;" (input)="updateColor('bgGradientStart', $event)">
+        </div>
+
+        <div class="color-group">
+          <label>Final</label>
+          <div class="color-preview" [style.background]="configCatalog.bgGradientEnd" (click)="openColorPicker('bgGradientEnd')"></div>
+          <input type="color" [(ngModel)]="configCatalog.bgGradientEnd" id="bgGradientEndPicker" style="display: none;" (input)="updateColor('bgGradientEnd', $event)">
+        </div>
+      </div>
+
+      <label for="bgGradientDirection">Direção do Gradiente</label>
+      <select [(ngModel)]="configCatalog.bgGradientDirection">
+        <option value="to right">Direita</option>
+        <option value="to bottom">Inferior</option>
+        <option value="to left">Esquerda</option>
+        <option value="to top">Superior</option>
+      </select>
+
+      <div class="gradient-preview"
+           [style.background]="'linear-gradient(' + configCatalog.bgGradientDirection + ', ' + configCatalog.bgGradientStart + ', ' + configCatalog.bgGradientEnd + ')'">
+      </div>
+    </div>
+
+    <!-- Upload de imagem para o banner -->
+    <div class="form-group">
+      <label for="bannerImage">Imagem do Banner</label>
+      <input type="file" id="bannerImage" (change)="uploadBanner($event)">
+      <div class="preview-banner" *ngIf="configCatalog.bannerImage">
+        <img [src]="configCatalog.bannerImage" alt="Banner carregado">
+      </div>
+    </div>
+
+    <!-- Texto do rodapé -->
+    <div class="form-group">
+      <label for="footerText">Texto do Rodapé</label>
+      <textarea [(ngModel)]="configCatalog.footerText"></textarea>
+    </div>
+
+    <button (click)="saveCatalogConfig()">Salvar Configurações</button>
+  </div> <!-- 🔹 Fechamento correto da div -->
+</ng-container> <!-- 🔹 Fechamento correto do ng-container -->

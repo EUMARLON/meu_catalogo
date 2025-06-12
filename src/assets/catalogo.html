@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <title>Catálogo de Produtos</title>
+    <link rel="stylesheet" type="text/css" href="/assets/catalogo.css">
+    
+    <!-- Carregamento correto dos scripts -->
+    <script defer src="https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+<body>
+  <!-- Cada .a3-container corresponderá a uma página de impressão -->
+  <div id="menu-superior">
+    <button id="downloadCatalog">Baixar Catálogo (PDF)</button>
+    <button id="downloadImage">Baixar Catálogo (Imagem)</button>
+  </div>
+  
+  <div class="a3-container">
+    
+    <div class="catalogo">
+      %%PRODUTOS%%
+    </div>
+  </div>
+
+  <!-- Se o catálogo for bem grande e precisar de mais de uma página, 
+       você pode utilizar múltiplos contêineres: -->
+  <!--
+  <div class="a3-container">
+    Conteúdo (ou continuação) do catálogo...
+  </div>
+  -->
+</body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("Página do catálogo carregada!");
+
+    // Forçar recarregamento das imagens no iframe
+    document.querySelectorAll(".produto img").forEach(img => {
+      img.src = img.src + "?nocache=" + Date.now();
+    });
+    console.log("Imagens recarregadas no iframe!");
+
+    document.getElementById("downloadCatalog").addEventListener("click", () => {
+  const catalogElement = document.querySelector(".a3-container");
+  if (!catalogElement) {
+    alert("Erro: catálogo não encontrado!");
+    return;
+  }
+
+  html2pdf().set({
+  margin: [0, 0, 0, 0],  
+  filename: "catalogo1.pdf",
+  image: { type: "jpeg", quality: 0.98 },
+  html2canvas: {
+    scale: 2,
+    useCORS: true,
+    scrollX: 0,
+    scrollY: 0,
+    allowTaint: true,
+    windowWidth: catalogElement.offsetWidth, /* 🔹 Captura apenas o tamanho visível */
+    windowHeight: catalogElement.offsetHeight
+  },
+  jsPDF: { unit: "mm", format: "a3", orientation: "portrait" }
+}).from(catalogElement).toPdf().get("pdf").then((pdf) => {
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const contentHeight = catalogElement.getBoundingClientRect().height; // 🔹 Obtém altura real
+
+  const totalPages = Math.ceil(contentHeight / pageHeight);
+
+  if (totalPages > 1 && totalPages < 3) { // 🔹 Impede criação de páginas desnecessárias
+    for (let i = 1; i < totalPages; i++) {
+      pdf.addPage();
+      pdf.setPage(i + 1);
+    }
+  }
+}).save();
+});
+
+
+
+    // Baixar como Imagem
+    document.getElementById("downloadImage").addEventListener("click", () => {
+  const catalogElement = document.querySelector(".a3-container");
+  if (!catalogElement) {
+    alert("Erro: catálogo não encontrado!");
+    return;
+  }
+
+  const totalPages = Math.ceil(catalogElement.scrollHeight / 4961); // Divide o conteúdo em partes A3
+
+  for (let i = 0; i < totalPages; i++) {
+    html2canvas(catalogElement, { 
+      scale: 4, 
+      useCORS: true, 
+      width: 3508, 
+      height: 4961
+    }).then(canvas => {
+      console.log("Canvas gerado com sucesso!");
+      
+      const imgData = canvas.toDataURL("image/png");
+
+      // Criar um link de download da imagem
+      const a = document.createElement("a");
+      a.href = imgData;
+      a.download = `catalogo_pagina_${i + 1}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }).catch(error => {
+      console.error("Erro ao gerar imagem:", error);
+    });
+  }
+});
+  });
+</script>

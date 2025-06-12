@@ -1,0 +1,358 @@
+
+.container {
+  min-height: 100vh; /* Garante que a altura seja, no mínimo, 100% da viewport */
+  background-color: #f8f9fa; /* Mantém o fundo do tema claro */
+  color: #222; /* Ajusta a cor do texto para melhor contraste */
+  
+}
+
+
+/* Menu de Configurações */
+.settings-menu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.settings-menu button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  margin: 0 15px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s ease-in-out;
+}
+
+.settings-menu button:hover {
+  color: #2ecc71;
+  transform: scale(1.05);
+}
+
+/* Conteúdo Principal */
+.settings-content {
+  text-align: center;
+}
+
+/* Modal Overlay com efeito de blur */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  backdrop-filter: blur(8px); /* Aplica o blur no fundo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  border-radius: 10px;
+  padding: 25px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão de Fechar no Modal */
+.modal-content .close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+.modal-content .close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 30px;
+  font-size: 22px;
+}
+
+.modal-content .close-button:hover {
+  color: rgb(243, 8, 8); /* Fica mais escuro no hover */
+}
+
+.modal-content .close-button:active {
+  transform: scale(0.9); /* Dá um efeito de clique */
+}
+
+/* Estilos do Formulário - Já ajustados anteriormente */
+.modal-content form {
+  margin-top: 20px;
+}
+
+.modal-content input, 
+.modal-content button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #abd33e;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.modal-content button {
+  background: linear-gradient(45deg, #3498db, #2ecc71);
+  border: none;
+  color: white;
+  padding: 10px 20px; 
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.modal-content button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .modal-content {
+    max-width: 90vw; /* ⚠️ Modal ocupará no máximo 90% da largura da tela */
+    max-height: 90vh; /* ⚠️ Modal ocupará no máximo 90% da altura da tela */
+    overflow-y: auto; /* ⚠️ Adiciona barra de rolagem interna se precisar */
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .settings-menu button {
+    font-size: 24px;
+    margin: 0 10px;
+  }
+
+  .modal-content input,
+  .modal-content button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+html, body, :host {
+  height: 100%;
+  min-height: 100vh;
+}
+  
+
+.modal-overlay {
+  min-height: 100vh;
+  height: 100%;
+}
+.settings-container {
+  min-height: 100vh;
+}
+
+[data-theme="light"] {
+  --button-bg: #f8f9fa;
+  --button-text: #333;
+  --button-border: #ccc;
+}
+
+[data-theme="dark"] {
+  --button-bg: #333;
+  --button-text: #f8f9fa;
+  --button-border: #666;
+}
+
+.settings-menu button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--button-border);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.settings-menu button:hover {
+  background: var(--button-border);
+}
+
+
+/* Espaçamento entre os campos */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+
+
+/* Modal no tema claro */
+.container.light-mode .modal-content {
+  background-color: #fff !important;
+  color: #333 !important;
+  border: 1px solid #ccc !important;
+}
+
+/* Modal no tema escuro */
+.container.dark-mode .modal-content {
+  background-color: #222 !important;
+  color: #f5f5f5 !important;
+  border: 1px solid #666 !important;
+}
+
+/* Tema claro - Ajuste de contraste */
+.container.light-mode .form-group input,
+.container.light-mode .form-group textarea,
+.container.light-mode .form-group select {
+  background-color: #fff !important;
+  color: #222 !important;
+  border: 1px solid #666 !important; /* Borda mais destacada */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+/* Tema escuro - Ajuste de contraste */
+.container.dark-mode .form-group input,
+.container.dark-mode .form-group textarea,
+.container.dark-mode .form-group select {
+  background-color: #2a2a2a !important;
+  color: #f5f5f5 !important;
+  border: 1px solid #aaa !important; /* Borda mais clara para destacar */
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* Sombra leve */
+}
+
+/* Melhorando os placeholders */
+.container.light-mode .form-group input::placeholder,
+.container.light-mode .form-group textarea::placeholder {
+  color: #777 !important; /* Cinza mais visível */
+}
+
+.container.dark-mode .form-group input::placeholder,
+.container.dark-mode .form-group textarea::placeholder {
+  color: #ccc !important; /* Cinza claro visível no escuro */
+}
+
+/* Fundo do formulário no tema claro */
+.container.light-mode .form-container {
+  background-color: #f8f9fa !important;
+  color: #222 !important;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Fundo do formulário no tema escuro */
+.container.dark-mode .form-container {
+  background-color: #282828 !important;
+  color: #f5f5f5 !important;
+  border-radius: 8px;
+  padding: 20px;
+}
+.modal-content {
+  max-width: 40vw; /* ⚠️ Modal ocupará no máximo 90% da largura da tela */
+  max-height: 90vh; /* ⚠️ Modal ocupará no máximo 90% da altura da tela */
+  overflow-y: auto; /* ⚠️ Adiciona barra de rolagem interna se precisar */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.preview-banner img {
+  max-width: 60%; /* Reduz a largura para 60% do container */
+  max-height: 200px; /* Define uma altura máxima para a imagem */
+  display: block;
+  margin: auto; /* Centraliza dentro do preview */
+  border-radius: 8px; /* Adiciona bordas arredondadas */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Adiciona um leve efeito de sombra */
+}
+.form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 🔹 Força apenas 2 colunas */
+  gap: 20px;
+}
+
+.color-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.color-preview {
+  width: 120px; /* 🔹 Aumenta a largura */
+  height: 30px; /* 🔹 Mantém a altura menor */
+  cursor: pointer;
+  border: 2px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+.gradient-container {
+  margin-top: 60px; /* 🔹 Espaçamento extra */
+}
+
+.gradient-preview {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.preview-banner img {
+  max-width: 80%;
+  max-height: 150px;
+  display: block;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 🔹 Centraliza o título */
+  text-align: center;
+}
+
+.form-group.gradient-section {
+  margin-top: 40px; /* 🔹 Move todo o bloco do gradiente mais para baixo */
+}
+
+.gradient-container {
+  margin-top: 10px; /* 🔹 Espaço extra entre o título e os seletores */
+}
+
+
+
+
+.gradient-container {
+  display: flex;
+  justify-content: center; /* 🔹 Alinha os seletores lado a lado */
+  gap: 0.45px;
+}
+
+
+.color-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.form-container h2 {
+  text-align: center; /* 🔹 Centraliza o título */
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

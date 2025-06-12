@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  margin: 0;
+  margin-left: 100px;
+  padding: 0;
+  box-sizing: border-box;
+  transition: margin-left 0.3s ease;
+  min-height: 100vh; /* Garante que a altura seja, no mínimo, 100% da viewport */
+  height: auto;      /* Permite que o conteúdo ultrapasse a altura mínima */
+
+}
+@media (max-width: 768px) {
+  .host {
+    margin: 10px; /* Reduz a margem em telas menores */
+    margin-left: 80px; /* Sidebar colapsada automaticamente */
+  }
+}

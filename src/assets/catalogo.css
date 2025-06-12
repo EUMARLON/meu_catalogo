@@ -1,0 +1,155 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+
+
+.grid-container {
+  background: transparent !important; /* Remove qualquer fundo, incluindo gradientes */
+  backdrop-filter: none; /* Impede qualquer efeito de fundo transparente */
+  box-shadow: none; /* Garante que não há sombras destacando o container */
+  border: none; /* Remove bordas caso estejam interferindo */
+
+
+}
+
+/* Estilo geral do cartão */
+.produto {
+  width: 250px;
+  height: 350px;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  background-color: #fff; /* 🔹 Fundo sólido para melhorar a captura */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* 🔹 Sombra mais intensa */
+}
+
+.produto:hover {
+  transform: translateY(-5px);
+}
+
+.produto img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Estilo do código */
+.codigo {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2c3e50; /* Cor personalizada para o código */
+}
+
+/* Estilo do desconto */
+.desconto {
+  display: inline-block;
+  margin-bottom: 10px;
+  background-color: #e74c3c; /* Cor para destacar o desconto */
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+/* Estilo para o Segmento */
+.segmento {
+  font-size: 1rem;
+  color: #34495e; /* Cor personalizada para o segmento */
+  margin: 5px 0;
+}
+
+/* Estilo para a Aplicação */
+.aplicacao {
+  font-size: 1rem;
+  color: #7f8c8d; /* Cor personalizada para a aplicação */
+  margin: 5px 0;
+}
+
+/* Estilo para a descrição de clientes */
+.descricao-clientes {
+  font-size: 1rem;
+  color: #2980b9; /* Exemplo: cor azul para a descrição dos clientes */
+  margin: 5px 0;
+}
+
+/* Estilo para a área de preços */
+.precos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Estilo do preço público */
+.preco-publico {
+  font-size: 0.9rem;
+  text-decoration: line-through;
+  color: #a0a0a0;
+}
+
+/* Estilo do preço de venda */
+.preco-venda {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+/* Informações internas */
+.produto .info {
+  padding: 15px;
+}
+
+#menu-superior {
+  position: fixed;   /* Fixa o menu no topo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(175, 5, 5);
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;  /* Mantém o menu sobre os outros elementos */
+}
+
+.a3-container {
+  width: 100%;
+  min-height: 420mm; /* Garante uma página cheia */
+  max-height: none; /* Impede limitação de altura */
+  overflow: visible; /* Evita que o conteúdo fique escondido */
+}
+
+
+.banner {
+  width: 100%;
+  height: 20%; /* Banner ocupa 20% da página */
+  text-align: center;
+}
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantém proporção da imagem carregada */
+}
+
+.rodape {
+  width: 100%;
+  height: 10%; /* Rodapé ocupa 10% da página */
+  text-align: center;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.preview-card {
+  border: 4px solid rgba(0, 0, 0, 0.2); /* 🔹 Simula um efeito de sombra */
+}

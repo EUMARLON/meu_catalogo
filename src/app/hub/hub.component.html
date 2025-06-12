@@ -1,0 +1,54 @@
+<div class="container" [ngClass]="{ 'dark-mode': isDarkMode, 'light-mode': !isDarkMode }">
+<!-- Botão para alternar tema -->
+<button class="theme-toggle-button" (click)="toggleTheme()" aria-label="Alternar tema">
+  <i [class]="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
+</button>
+
+<!-- Botão para abrir ou fechar a sidebar -->
+<button class="sidebar-toggle-button" (click)="toggleSidebar()" aria-label="Alternar sidebar">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- Sidebar -->
+<nav class="sidebar" [ngClass]="{ 'collapsed': !isSidebarOpen }">
+  <ul class="menu">
+    <li>
+      <a routerLink="/hub/user-panel">
+        <i class="fas fa-home"></i>
+        <span class="menu-text">Home</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/hub/dashboard">
+        <i class="fa fa-pie-chart"></i>
+        <span class="menu-text">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/hub/settings">
+        <i class="fas fa-cog"></i>
+        <span class="menu-text">Configurações</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/hub/reports">
+        <i class="fas fa-question-circle"></i>
+        <span class="menu-text">Ajuda</span>
+      </a>
+    </li>
+  </ul>
+  <button class="sidebar-toggle-button" (click)="toggleSidebar()">
+    <i class="fas fa-chevron-left" *ngIf="isSidebarOpen"></i>
+    <i class="fas fa-chevron-right" *ngIf="!isSidebarOpen"></i>
+  </button>
+
+  <button class="logout-button" (click)="logout()">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</nav>
+
+<!-- Conteúdo principal -->
+<main class="content" [ngStyle]="{'margin-left': isSidebarOpen ? '100px' : '05px'}">
+  <router-outlet></router-outlet>
+
+  
